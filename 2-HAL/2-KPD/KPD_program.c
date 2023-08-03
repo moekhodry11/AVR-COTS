@@ -32,20 +32,20 @@ u8 KPD_u8GetKeyState(u8 * Copy_pu8ReturnedKey)
 		/* Activate Each Row => For loop on the pins of the rows */
 		for(Local_u8RowsCounter = 0; Local_u8RowsCounter <= 3 ; Local_u8RowsCounter++)
 		{
-			DIO_u8SetPinValue(KPD_u8_PORT,KPD_Au8RowsPins[Local_u8RowsCounter],DIO_u8_LOW);
+			DIO_u8SetPinValue(KPD_ROWS_u8_PORT,KPD_Au8RowsPins[Local_u8RowsCounter],DIO_u8_LOW);
 			/* Check Which Input Pin Has Zero */
 			for(Local_u8ColsCounter = 0; Local_u8ColsCounter <= 3 ; Local_u8ColsCounter++)
 			{
-				DIO_u8GetPinValue(KPD_u8_PORT,KPD_Au8ColsPins[Local_u8ColsCounter],&Local_u8PinValue);
+				DIO_u8GetPinValue(KPD_COLS_u8_PORT,KPD_Au8ColsPins[Local_u8ColsCounter],&Local_u8PinValue);
 				if(Local_u8PinValue == DIO_u8_LOW)/* Switch is Pressed */
 				{
 					/* Debouncing */
 					_delay_ms(20);
-					DIO_u8GetPinValue(KPD_u8_PORT,KPD_Au8ColsPins[Local_u8ColsCounter],&Local_u8PinValue);
+					DIO_u8GetPinValue(KPD_COLS_u8_PORT,KPD_Au8ColsPins[Local_u8ColsCounter],&Local_u8PinValue);
 					/* Check if the Pin is still equal LOW */
 					while(Local_u8PinValue == DIO_u8_LOW)
 					{
-						DIO_u8GetPinValue(KPD_u8_PORT,KPD_Au8ColsPins[Local_u8ColsCounter],&Local_u8PinValue);
+						DIO_u8GetPinValue(KPD_COLS_u8_PORT,KPD_Au8ColsPins[Local_u8ColsCounter],&Local_u8PinValue);
 					}
 					*Copy_pu8ReturnedKey = KPD_Au8Keys[Local_u8RowsCounter][Local_u8ColsCounter];
 					Local_u8Flag = 1;
@@ -53,7 +53,7 @@ u8 KPD_u8GetKeyState(u8 * Copy_pu8ReturnedKey)
 				}
 			}
 			/* Deactivate Row */
-			DIO_u8SetPinValue(KPD_u8_PORT,KPD_Au8RowsPins[Local_u8RowsCounter],DIO_u8_HIGH);
+			DIO_u8SetPinValue(KPD_ROWS_u8_PORT,KPD_Au8RowsPins[Local_u8RowsCounter],DIO_u8_HIGH);
 			if(Local_u8Flag == 1)
 			{	
 				break;	

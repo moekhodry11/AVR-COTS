@@ -38,7 +38,7 @@ void LCD_voidInit(void);
 /* Input      ! Command number                                                         */
 /* Output     ! Nothing                                                                */
 /***************************************************************************************/
-void LCD_voidSendCmnd(u8 Copy_u8Cmnd);
+void LCD_voidSendCmnd(u16 Copy_u8Cmnd);
 
 /***************************************************************************************/
 /* Description! Interface to write character on LCD screen                             */
@@ -55,7 +55,7 @@ void LCD_voidSendChar(u8 Copy_u8Data);
 void LCD_voidSendString (u8* Copy_pu8String);
 
 void LCD_voidSendIntger(s32 Copy_s32Data);
-void LCD_voidSendFloat(f32 Copy_f32Data);
+void LCD_voidSendFloat(f64 Copy_f32Data);
 
 void LCD_voidGotoxy (u8 Copy_u8Y,u8 Copy_u8X);
 void LCD_voidSendExtraChar (u8 Copy_u8Y,u8 Copy_u8X);

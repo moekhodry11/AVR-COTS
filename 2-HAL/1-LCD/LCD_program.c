@@ -125,7 +125,7 @@ void LCD_voidInit(void) {
 /* Input      ! Command number                                                         */
 /* Output     ! Nothing                                                                */
 /***************************************************************************************/
-void LCD_voidSendCmnd(u8 Copy_u8Cmnd) {
+void LCD_voidSendCmnd(u16 Copy_u8Cmnd) {
 
 #if LCD_u8_MODE == LCD_u8_MODE_8_BIT
 
@@ -133,10 +133,19 @@ void LCD_voidSendCmnd(u8 Copy_u8Cmnd) {
 	DIO_u8SetPinValue(LCD_u8_CONTROL_PORT, LCD_u8_RS_PIN, DIO_u8_LOW);
 
 	/* Set R/W to DIO_u8_LOW */
-	DIO_u8SetPinValue(LCD_u8_CONTROL_PORT, LCD_u8_RW_PIN, DIO_u8_LOW);
+	//DIO_u8SetPinValue(LCD_u8_CONTROL_PORT, LCD_u8_RW_PIN, DIO_u8_LOW);
 
 	/* Load Command on Data bus */
-	DIO_u8SetPortValue(LCD_u8_DATA_PORT, Copy_u8Cmnd);
+	//DIO_u8SetPortValue(LCD_u8_DATA_PORT, Copy_u8Cmnd);
+	DIO_u8SetPinValue(LCD_u8_DATA_PORT, LCD_u8_D7_PIN, GET_BIT(Copy_u8Cmnd, 7));
+	DIO_u8SetPinValue(LCD_u8_DATA_PORT, LCD_u8_D6_PIN, GET_BIT(Copy_u8Cmnd, 6));
+	DIO_u8SetPinValue(LCD_u8_DATA_PORT, LCD_u8_D5_PIN, GET_BIT(Copy_u8Cmnd, 5));
+	DIO_u8SetPinValue(LCD_u8_DATA_PORT, LCD_u8_D4_PIN, GET_BIT(Copy_u8Cmnd, 4));
+
+	DIO_u8SetPinValue(LCD_u8_DATA_PORT, LCD_u8_D3_PIN, GET_BIT(Copy_u8Cmnd, 3));
+	DIO_u8SetPinValue(LCD_u8_DATA_PORT, LCD_u8_D2_PIN, GET_BIT(Copy_u8Cmnd, 2));
+	DIO_u8SetPinValue(LCD_u8_DATA_PORT, LCD_u8_D1_PIN, GET_BIT(Copy_u8Cmnd, 1));
+	DIO_u8SetPinValue(LCD_u8_DATA_PORT, LCD_u8_D0_PIN, GET_BIT(Copy_u8Cmnd, 0));
 
 	/* Set E to DIO_u8_HIGH  */
 	DIO_u8SetPinValue(LCD_u8_CONTROL_PORT, LCD_u8_E_PIN, DIO_u8_HIGH);
@@ -153,10 +162,13 @@ void LCD_voidSendCmnd(u8 Copy_u8Cmnd) {
 	DIO_u8SetPinValue(LCD_u8_CONTROL_PORT, LCD_u8_RS_PIN, DIO_u8_LOW);
 
 	/* Set R/W to DIO_u8_LOW */
-	DIO_u8SetPinValue(LCD_u8_CONTROL_PORT, LCD_u8_RW_PIN, DIO_u8_LOW);
-
+	//DIO_u8SetPinValue(LCD_u8_CONTROL_PORT, LCD_u8_RW_PIN, DIO_u8_LOW);
 	/* Load Command on Data bus */
-	DIO_u8SetPortValue(LCD_u8_DATA_PORT, Copy_u8Cmnd);
+	//DIO_u8SetPortValue(LCD_u8_DATA_PORT, Copy_u8Cmnd);
+	DIO_u8SetPinValue(LCD_u8_DATA_PORT, LCD_u8_D7_PIN, GET_BIT(Copy_u8Cmnd, 7));
+	DIO_u8SetPinValue(LCD_u8_DATA_PORT, LCD_u8_D6_PIN, GET_BIT(Copy_u8Cmnd, 6));
+	DIO_u8SetPinValue(LCD_u8_DATA_PORT, LCD_u8_D5_PIN, GET_BIT(Copy_u8Cmnd, 5));
+	DIO_u8SetPinValue(LCD_u8_DATA_PORT, LCD_u8_D4_PIN, GET_BIT(Copy_u8Cmnd, 4));
 
 	/* Set E to DIO_u8_HIGH  */
 	DIO_u8SetPinValue(LCD_u8_CONTROL_PORT, LCD_u8_E_PIN, DIO_u8_HIGH);
@@ -168,7 +180,11 @@ void LCD_voidSendCmnd(u8 Copy_u8Cmnd) {
 	DIO_u8SetPinValue(LCD_u8_CONTROL_PORT, LCD_u8_E_PIN, DIO_u8_LOW);
 
 	/*write the rest of the command */
-	DIO_u8SetPortValue(LCD_u8_DATA_PORT, Copy_u8Cmnd << 4);
+	//DIO_u8SetPortValue(LCD_u8_DATA_PORT, Copy_u8Cmnd << 4);
+	DIO_u8SetPinValue(LCD_u8_DATA_PORT, LCD_u8_D7_PIN, GET_BIT(Copy_u8Cmnd, 3));
+	DIO_u8SetPinValue(LCD_u8_DATA_PORT, LCD_u8_D6_PIN, GET_BIT(Copy_u8Cmnd, 2));
+	DIO_u8SetPinValue(LCD_u8_DATA_PORT, LCD_u8_D5_PIN, GET_BIT(Copy_u8Cmnd, 1));
+	DIO_u8SetPinValue(LCD_u8_DATA_PORT, LCD_u8_D4_PIN, GET_BIT(Copy_u8Cmnd, 0));
 
 	/* Set E to DIO_u8_HIGH  */
 	DIO_u8SetPinValue(LCD_u8_CONTROL_PORT, LCD_u8_E_PIN, DIO_u8_HIGH);
@@ -194,13 +210,23 @@ void LCD_voidSendChar(u8 Copy_u8Data) {
 	DIO_u8SetPinValue(LCD_u8_CONTROL_PORT, LCD_u8_RS_PIN, DIO_u8_HIGH);
 
 	/* Set R/W to DIO_u8_LOW */
-	DIO_u8SetPinValue(LCD_u8_CONTROL_PORT, LCD_u8_RW_PIN, DIO_u8_LOW);
+	//DIO_u8SetPinValue(LCD_u8_CONTROL_PORT, LCD_u8_RW_PIN, DIO_u8_LOW);
 
 	/* Set E to DIO_u8_HIGH */
 	DIO_u8SetPinValue(LCD_u8_CONTROL_PORT, LCD_u8_E_PIN, DIO_u8_HIGH);
 
 	/* Load Command on Data bus */
-	DIO_u8SetPortValue(LCD_u8_DATA_PORT, Copy_u8Data);
+	//DIO_u8SetPortValue(LCD_u8_DATA_PORT, Copy_u8Data);
+
+	DIO_u8SetPinValue(LCD_u8_DATA_PORT, LCD_u8_D7_PIN, GET_BIT(Copy_u8Data, 7));
+	DIO_u8SetPinValue(LCD_u8_DATA_PORT, LCD_u8_D6_PIN, GET_BIT(Copy_u8Data, 6));
+	DIO_u8SetPinValue(LCD_u8_DATA_PORT, LCD_u8_D5_PIN, GET_BIT(Copy_u8Data, 5));
+	DIO_u8SetPinValue(LCD_u8_DATA_PORT, LCD_u8_D4_PIN, GET_BIT(Copy_u8Data, 4));
+
+	DIO_u8SetPinValue(LCD_u8_DATA_PORT, LCD_u8_D3_PIN, GET_BIT(Copy_u8Data, 3));
+	DIO_u8SetPinValue(LCD_u8_DATA_PORT, LCD_u8_D2_PIN, GET_BIT(Copy_u8Data, 2));
+	DIO_u8SetPinValue(LCD_u8_DATA_PORT, LCD_u8_D1_PIN, GET_BIT(Copy_u8Data, 1));
+	DIO_u8SetPinValue(LCD_u8_DATA_PORT, LCD_u8_D0_PIN, GET_BIT(Copy_u8Data, 0));
 
 	/* Set E to DIO_u8_LOW */
 	DIO_u8SetPinValue(LCD_u8_CONTROL_PORT, LCD_u8_E_PIN, DIO_u8_LOW);
@@ -219,13 +245,16 @@ void LCD_voidSendChar(u8 Copy_u8Data) {
 	DIO_u8SetPinValue(LCD_u8_CONTROL_PORT, LCD_u8_RS_PIN, DIO_u8_HIGH);
 
 	/* Set R/W to DIO_u8_LOW */
-	DIO_u8SetPinValue(LCD_u8_CONTROL_PORT, LCD_u8_RW_PIN, DIO_u8_LOW);
-
+	//DIO_u8SetPinValue(LCD_u8_CONTROL_PORT, LCD_u8_RW_PIN, DIO_u8_LOW);
 	/* Set E to DIO_u8_HIGH */
 	DIO_u8SetPinValue(LCD_u8_CONTROL_PORT, LCD_u8_E_PIN, DIO_u8_HIGH);
 
 	/* Load Command on Data bus */
-	DIO_u8SetPortValue(LCD_u8_DATA_PORT, Copy_u8Data);
+	//DIO_u8SetPortValue(LCD_u8_DATA_PORT, Copy_u8Data);
+	DIO_u8SetPinValue(LCD_u8_DATA_PORT, LCD_u8_D7_PIN, GET_BIT(Copy_u8Data, 7));
+	DIO_u8SetPinValue(LCD_u8_DATA_PORT, LCD_u8_D6_PIN, GET_BIT(Copy_u8Data, 6));
+	DIO_u8SetPinValue(LCD_u8_DATA_PORT, LCD_u8_D5_PIN, GET_BIT(Copy_u8Data, 5));
+	DIO_u8SetPinValue(LCD_u8_DATA_PORT, LCD_u8_D4_PIN, GET_BIT(Copy_u8Data, 4));
 
 	/* Set E to DIO_u8_LOW */
 	DIO_u8SetPinValue(LCD_u8_CONTROL_PORT, LCD_u8_E_PIN, DIO_u8_LOW);
@@ -237,7 +266,11 @@ void LCD_voidSendChar(u8 Copy_u8Data) {
 	DIO_u8SetPinValue(LCD_u8_CONTROL_PORT, LCD_u8_E_PIN, DIO_u8_HIGH);
 
 	/*Load the rest of the command on Data bus */
-	DIO_u8SetPortValue(LCD_u8_DATA_PORT, Copy_u8Data << 4);
+	//DIO_u8SetPortValue(LCD_u8_DATA_PORT, Copy_u8Data << 4);
+	DIO_u8SetPinValue(LCD_u8_DATA_PORT, LCD_u8_D7_PIN, GET_BIT(Copy_u8Data, 3));
+	DIO_u8SetPinValue(LCD_u8_DATA_PORT, LCD_u8_D6_PIN, GET_BIT(Copy_u8Data, 2));
+	DIO_u8SetPinValue(LCD_u8_DATA_PORT, LCD_u8_D5_PIN, GET_BIT(Copy_u8Data, 1));
+	DIO_u8SetPinValue(LCD_u8_DATA_PORT, LCD_u8_D4_PIN, GET_BIT(Copy_u8Data, 0));
 
 	/* Set E to DIO_u8_LOW */
 	DIO_u8SetPinValue(LCD_u8_CONTROL_PORT, LCD_u8_E_PIN, DIO_u8_LOW);
@@ -282,13 +315,13 @@ void LCD_voidSendIntger(s32 Copy_s32Data) {
 	LCD_voidSendString(str);
 }
 
-void LCD_voidSendFloat(f32 Copy_f32Data) {
-	s16 int_part;
+void LCD_voidSendFloat(f64 Copy_f32Data) {
+	s32 int_part;
 	f32 frac_part;
 	// separate integer and fractional parts
-	int_part = (s16) Copy_f32Data;
+	int_part = (s32) Copy_f32Data;
 	frac_part = Copy_f32Data - int_part;
-	frac_part = (s16) (frac_part * 1000);
+	frac_part = (s32) (frac_part * 1000);
 	LCD_voidSendIntger(int_part);
 	LCD_voidSendChar('.');
 	LCD_voidSendIntger(frac_part);
@@ -300,19 +333,28 @@ void LCD_voidSendFloat(f32 Copy_f32Data) {
 /* Output     ! Nothing                                                                */
 /***************************************************************************************/
 void LCD_voidGotoxy(u8 Copy_u8Y, u8 Copy_u8X) {
-	if (Copy_u8X > 0 && Copy_u8X <= 16) {
+	u8 line;
+
 		switch (Copy_u8Y) {
+		case 0:
+			line = 0x00;
+
+			break;
 		case 1:
-			LCD_voidSendCmnd(Copy_u8X + 127);
+			line = 0x40;
 			break;
 		case 2:
-			LCD_voidSendCmnd(Copy_u8X + 191);
+			line = 0x14;
+			break;
+		case 3:
+			line = 0x54;
 			break;
 		default:
 			break;
 		}
+		u8 ddram_address = line + Copy_u8X;
+		LCD_voidSendCmnd(0x80 | ddram_address);
 	}
-}
 
 /***************************************************************************************/
 /* Description! Interface to write extra characters saved in the CGRAM                 */
